@@ -1,25 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import FormControlled from './Components/FormControlled';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <div className="container-fluid">
+        <div className="row justify-content-center">
+          <div className="col-lg-6 col-md-6">
+            <FormControlled />
+          </div>
+        </div>
+    </div>);
 }
 
 export default App;
