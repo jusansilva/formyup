@@ -1,11 +1,13 @@
 import * as yup from 'yup';
 
+const nameRegExp = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/;
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const max = new Date();
+const emailRegExp= /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 export const FormValidations = yup.object().shape({
     name: yup
     .string()
-    .matches(/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/, 'Campo nome não aceita numeros')
+    .matches(nameRegExp, 'Campo nome não aceita numeros')
     .required("Nome é obrigatório"),
     endereco: yup
     .string()
@@ -16,7 +18,7 @@ export const FormValidations = yup.object().shape({
     .required("Telefone é obrigatório"),
     email: yup
     .string()
-    .matches(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i, 'Formato de email não valido')
+    .matches(emailRegExp, 'Formato de email não valido')
     .required("Email é obrigatório"),
     nascimento: yup
     .date()

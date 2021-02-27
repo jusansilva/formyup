@@ -11,10 +11,18 @@ const initialFormState = {
     nascimento: ''
 }
 
+
+
 const UserForm = () => {
 
     const [form, setForm] = useState(initialFormState);
     const [errors, setErrors] = useState({});
+
+
+    const inputChange = (event) => {
+
+        return setInput(event.target)
+    }
 
     const validate = async () => {
         try {
@@ -32,8 +40,25 @@ const UserForm = () => {
     };
 
     const setInput = (newValue) => {
-        console.log(newValue)
-        setForm(form => ({ ...form, ...newValue }));
+        let data = "";
+        switch (newValue.name) {
+            case "nome":
+                data = { "name": newValue.value }
+                break;
+            case "endereco":
+                data = { "endereco": newValue.value }
+                break;
+            case "email":
+                data = { "email": newValue.value }
+                break;
+            case 'telefone':
+                data = { "telefone": newValue.value }
+                break;
+            case 'nascimento':
+                data = { "nascimento": newValue.value }
+                break;
+        }
+        setForm(form => ({ ...form, ...data }));
     };
 
     useEffect(() => { validate() }, [form]);
@@ -45,7 +70,7 @@ const UserForm = () => {
                 <div className="form-group">
                     <Input
                         name="nome"
-                        onChange={e => setInput({ name: e.target.value })}
+                        onChange={inputChange}
                         label="Nome"
                         error={errors.name}
                     />
@@ -53,7 +78,7 @@ const UserForm = () => {
                 <div className="form-group">
                     <Input
                         name="email"
-                        onChange={e => setInput({ email: e.target.value })}
+                        onChange={inputChange}
                         label="E-mail"
                         error={errors.email}
                     />
@@ -61,7 +86,7 @@ const UserForm = () => {
                 <div className="form-group">
                     <Input
                         name="endereco"
-                        onChange={e => setInput({ endereco: e.target.value })}
+                        onChange={inputChange}
                         label="Endereço"
                         error={errors.endereco}
                     />
@@ -70,7 +95,7 @@ const UserForm = () => {
                     <Input
                         name="telefone"
                         mask="(99) 99999-9999"
-                        onChange={e => setInput({ telefone: e.target.value.replace(/[\[\].!'@,><|://\\;&*()_+=]/g, "") })}
+                        onChange={inputChange}
                         label="Telefone"
                         error={errors.telefone}
                     />
@@ -79,7 +104,7 @@ const UserForm = () => {
                     <Input
                         mask="99/99/9999"
                         name="nascimento"
-                        onChange={e => setInput({ nascimento: e.target.value })}
+                        onChange={inputChange}
                         label="Data Nascimento"
                         error={errors.nascimento} />
                 </div>
